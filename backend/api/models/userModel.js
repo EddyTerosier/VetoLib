@@ -2,6 +2,7 @@ const sequelize = require("../../database/database");
 const { DataTypes } = require("sequelize");
 const Animal = require("./animalModel");
 const Cabinet = require("./cabinetModel");
+const bcrypt = require("bcrypt");
 
 const User = sequelize.define(
   "user",
@@ -37,8 +38,15 @@ const User = sequelize.define(
   },
   {
     freezeTableName: true,
-  },
-);
+    instanceMethods: {
+        generateHash(password) {
+            return bcrypt.hash(password, bcrypt.genSaltSync(8));// 8 ou 10 ?
+        },
+        validPassword(password) {
+            return bcrypt.compare(password, this.password);
+        }
+    }
+});
 
 User.hasMany(Animal);
 Animal.belongsTo(User);
