@@ -1,5 +1,5 @@
 const Cabinet = require('../models/cabinetModel');
-const Animal = require('../models/animalModel'); // Assurez-vous que la casse est correcte et cohérente
+const Animal = require('../models/animalModel'); 
 const User = require('../models/userModel');
 
 const CabinetController = {
