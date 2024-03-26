@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userControllers');
-const { isAuthenticated, hasRole } = require('../middleware/middleware');
+// const { isAuthenticated, hasRole } = require('../middleware/middleware');
 
 
 router.get('/getUser/:id',  userController.getUser);
