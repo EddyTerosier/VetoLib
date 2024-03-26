@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home.jsx";
+import Registration from "./components/Registration.jsx";
 import "./App.css";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/registration" element={<Registration />}></Route>
         <Route path="/" element={<Home />}></Route>
       </Routes>
     </>
