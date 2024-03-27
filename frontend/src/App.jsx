@@ -5,10 +5,12 @@ import Registration from "./components/Registration.jsx";
 import Appointment from "./components/Appointment.jsx";
 import Profile from "./components/Profile.jsx";
 import "./App.css";
+import Header from "./components/partials/Header.jsx";
 
 function App() {
   return (
     <>
+      <Header />
       <Routes>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/registration" element={<Registration />}></Route>
