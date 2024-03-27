@@ -57,7 +57,37 @@ const CabinetController = {
             }
         });
         res.status(200).json("cabinet supprimé");
-    }
+    },
+    //pour les routes filtrées
+    //afficher les cabinets par leurs noms    
+    getCabinetByName: async(req,res) => {
+        try {
+            const cabinetName = req.params.name;
+            const cabinet = await Cabinet.findAll({
+                where:{
+                    name:cabinetName,
+                }
+            });
+            res.status(200).json(cabinet)
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    //afficher les cabinets par leurs adresse 
+    getCabinetByAddress: async(req,res) => {
+        try {
+            const cabinetAddress = req.params.address;
+            const cabinet = await Cabinet.findAll({
+                where:{
+                    address:cabinetAddress,
+                }
+            });
+            res.status(200).json(cabinet)
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+
 };
 
 module.exports = CabinetController;
