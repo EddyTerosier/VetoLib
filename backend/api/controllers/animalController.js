@@ -1,4 +1,3 @@
-const db = require('../../database/database');
 const Animal = require('../models/animalModel');
 
 //ecriture des différentes logiques crud concernant la table animal
@@ -26,11 +25,17 @@ exports.getAnimal = async(req,res) => {
     });
 }
 
-//pour ajouter un animal -> test OK
-exports.postAnimal = async(req,res) => {
+exports.postAnimal = async(req, res) => {
     let animal = req.body;
-    await Animal.create(animal)
-    res.status(200).json("animal ajouté");
+    if (!animal.userId) {
+        return res.status(400).json({ message: "Erreur lors de la récupération de l'ID utilisateur" });
+    }
+    try {
+        const newAnimal = await Animal.create(animal);
+        res.status(201).json({ message: "Animal ajouté avec succès", animal: newAnimal });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de l'ajout de l'animal", error: error.message });
+    }
 }
 
 //pour modifier un animal
