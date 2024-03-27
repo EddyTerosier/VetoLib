@@ -11,10 +11,10 @@ route.delete('/deleteAnimal/:id', animalController.deleteAnimal)
 
 
 //routes filtrées par champs de la base de données
-route.get('/getAnimalByName', animalController.getAnimalByName)
-route.get('/getAnimalByAge', animalController.getAnimalByAge)
-route.get('/getAnimalByRace', animalController.getAnimalByRace)
-route.get('/getAnimalByType', animalController.getAnimalByType)
+route.get('/getAnimalByName/:name', animalController.getAnimalByName)
+route.get('/getAnimalByAge/:age', animalController.getAnimalByAge)
+route.get('/getAnimalByRace/:race', animalController.getAnimalByRace)
+route.get('/getAnimalByType/:type', animalController.getAnimalByType)
 
 
 module.exports = route;
