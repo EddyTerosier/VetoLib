@@ -15,9 +15,6 @@ export default function ProtectedRoute({ element }) {
   }
 
   const token = getCookie("jwt");
-
-  console.log("Token: ", token);
-
   return token ? element : <Navigate to="/login" />;
 }
 
