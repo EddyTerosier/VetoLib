@@ -6,6 +6,7 @@ export default function Registration() {
     lastname: "",
     email: "",
     password: "",
+    role: "user",
   });
 
   const [isAdmin, setIsAdmin] = useState(false);
@@ -41,40 +42,6 @@ export default function Registration() {
         alert("Erreur lors de l'inscription: " + error.message);
       });
   };
-
-  // useEffect(() => {
-  //   const token = getCookie("jwt");
-  //   if (token) {
-  //     fetch("http://127.0.0.1:8000/user/profile", {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: "Bearer " + token,
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         if (data.role === "admin") {
-  //           setIsAdmin(true);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Erreur:", error);
-  //         alert("Erreur lors de la récupération du profil: " + error.message);
-  //       });
-  //   }
-  // }, []);
-
-  // Fonction pour récupérer un cookie par son nom
-  function getCookie(name) {
-    let cookieArr = document.cookie.split(";");
-    for (let i = 0; i < cookieArr.length; i++) {
-      let cookiePair = cookieArr[i].split("=");
-      if (name === cookiePair[0].trim()) {
-        return decodeURIComponent(cookiePair[1]);
-      }
-    }
-    return null;
-  }
 
   return (
     <main>
@@ -118,6 +85,27 @@ export default function Registration() {
                         onChange={handleChange}
                         placeholder="Adresse e-mail"
                       />
+                    </div>
+                    <div className="form-group">
+                      <label>Role</label>
+                      <div>
+                        <input
+                          type="radio"
+                          id="user"
+                          name="role"
+                          value="user"
+                          onChange={handleChange}
+                        />
+                        <label htmlFor="user">User</label>
+                        <input
+                          type="radio"
+                          id="vet"
+                          name="role"
+                          value="vet"
+                          onChange={handleChange}
+                        />
+                        <label htmlFor="vet">Vétérinaire</label>
+                      </div>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
