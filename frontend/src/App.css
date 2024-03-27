@@ -1,10 +1,7 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
 
+:root{
+  font-family: "Roboto Condensed", sans-serif;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -40,3 +37,42 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Styles de la barre de navigation */
+.navbar {
+  background-color: #f39c12; /* Couleur orange pour correspondre au thème */
+  box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Ajoute une ombre légère pour la profondeur */
+  padding: 0;
+}
+
+.navbar a {
+  color: white; /* Texte blanc pour contraster avec le fond orange */
+
+margin: 0 20px; /* Espacement entre les liens */
+}
+
+.navbar a:hover {
+  color: white; /* Orange plus foncé au survol pour un effet interactif */
+}
+
+.navbar-toggler {
+  border-color: rgba(255,255,255,.5); /* Couleur de la bordure du bouton en mode mobile */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFF' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* Icône personnalisée pour le bouton de menu en mode mobile */
+}
+
+/* Styles pour les éléments de navigation active et en état de survol */
+.nav-link:hover, .nav-link:focus {
+  background-color: #e67e22; /* Fond orange plus foncé pour les éléments actifs ou au survol */
+  border-radius: .25rem; /* Bordures arrondies pour les liens */
+  transition: background-color 0.2s; /* Transition douce pour le fond */
+}
+
+/* Correction de la structure HTML pour les éléments de navigation */
+.navbar-nav .nav-link {
+  display: block;
+  padding: 0.5rem 1rem; /* Espace autour des liens pour un meilleur toucher */
+}
+

@@ -1,3 +1,134 @@
 /*============================================================================================*/
 /* Your custom styles below */
 /*============================================================================================*/
+
+/* Couleurs et styles généraux */
+.bg-orange {
+    background-color: #f39c12;
+}
+
+.btn-modern {
+    background-color: #323539;
+    border: none;
+    color: white;
+}
+.btn-modern:hover {
+    background-color: white;
+    color: #323539;
+}
+
+.section-title {
+    color: #d35400;
+}
+
+/* Personnalisation supplémentaire pour les formulaires et les icônes */
+.form-control {
+    border: 2px solid #e67e22;
+}
+
+.bi {
+    color: #e67e22;
+}
+
+/* Améliorations responsives */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem;
+    }
+}
+
+.list-item-custom {
+    display: flex;
+    align-items: center; /* Cette ligne assure que les éléments sont centrés verticalement */
+    justify-content: flex-start; /* Cette ligne assure que les éléments sont alignés à gauche */
+    width: 100%; /* Assure que l'élément de la liste prend la largeur complète */
+    padding: 20px;
+}
+
+.icon-custom {
+    margin-right: 15px; /* Ajustez l'espace entre l'icône et le texte */
+    flex-shrink: 0; /* Empêche l'icône de rétrécir */
+    text-align: center; /* Centre l'icône dans son conteneur */
+    width: 32px; /* Fixe la largeur de l'icône */
+}
+
+.text-custom {
+    flex-grow: 1; /* Le texte prendra tout l'espace restant */
+    text-align: left; /* Assure que le texte est aligné à gauche */
+}
+/* Page de prise de rendez vous */
+.appointment-page {
+    background-color: #fff; /* Arrière-plan blanc pour une lisibilité accrue */
+    padding: 20px;
+}
+
+.info-section, .faq-section {
+    margin-bottom: 40px;
+}
+
+/* Arrière-plan global de la page */
+.appointment-page {
+    background-color: #f8f9fa; /* Une couleur de fond neutre pour la page entière */
+    padding-bottom: 40px; /* Espacement en bas de la page */
+}
+
+.appointmentBtn{
+    background-color: darkorange;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.appointmentBtn:hover{
+    background-color: orange;
+}
+
+
+/* Style de la page de rendez-vous */
+/* Section d'information avec un fond plus dynamique */
+.info-section {
+    background: linear-gradient(to right, rgba(243, 156, 18, 0.7), rgba(231, 76, 60, 0.7)), url('https://images.unsplash.com/photo-1561037404-61e1fe9d3836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'); /* Un dégradé d'orange */
+    color: white; /* Texte blanc pour le contraste */
+    padding: 40px 20px; /* Espacement autour du contenu */
+    border-radius: 8px; /* Bords arrondis */
+    margin-bottom: 40px; /* Espacement après la section */
+    background-color: orange;
+}
+
+/* Styles du formulaire pour le rendre plus distinct */
+.form-container {
+    background-color: white; /* Fond blanc pour le formulaire */
+    padding: 40px;
+    border-radius: 8px; /* Bords arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée légère pour le relief */
+}
+
+/* Style de l'accordéon FAQ pour s'harmoniser avec le reste */
+.faq-section {
+    padding: 20px;
+    background-color: #fff; /* Arrière-plan blanc pour contraster avec le fond global */
+    border-radius: 8px; /* Bords arrondis */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre portée légère */
+}
+
+/* Style spécifique des boutons de l'accordéon pour s'adapter à l'esthétique de la page */
+.accordion-button {
+    background: linear-gradient(to right, rgba(243, 156, 18, 0.7), rgba(231, 76, 60, 0.7)), url('https://images.unsplash.com/photo-1561037404-61e1fe9d3836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    background-color: orange;
+    color: white; /* Texte blanc pour le contraste */
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: lightgrey; /* Orange plus foncé lorsque déplié */
+}
+
+.accordion-item {
+    border-radius: 8px; /* Bords arrondis pour chaque élément de l'accordéon */
+    margin-bottom: 15px; /* Espacement entre les éléments de l'accordéon */
+}
+
+.accordion-body {
+    background-color: #fff; /* Fond blanc pour le corps de l'accordéon */
+}
+

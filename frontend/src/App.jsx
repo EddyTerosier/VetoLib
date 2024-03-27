@@ -2,13 +2,15 @@ import { Link, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home.jsx";
 import Registration from "./components/Registration.jsx";
+import Appointment from "./components/Appointment.jsx";
+import Profile from "./components/Profile.jsx";
 import "./App.css";
 
 function App() {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
+        <div className="container-fluid bg-dark my-0">
           <Link to="/">Accueil</Link>
           <button
             className="navbar-toggler"
@@ -23,21 +25,21 @@ function App() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-link">
-                <Link to="/booking">Prendre un RDV</Link>
-              </a>
-              <a className="nav-link">
+              <li className="nav-link">
+                <Link to="/appointment">Prendre un RDV</Link>
+              </li>
+              <li className="nav-link">
                 <Link to="/profile">Mon profil</Link>
-              </a>
-              <a className="nav-link">
+              </li>
+              <li className="nav-link">
                 <Link to="/login">Login</Link>
-              </a>
-              <a className="nav-link">
+              </li>
+              <li className="nav-link">
                 <Link to="/registration">Registration</Link>
-              </a>
-              <a className="nav-link">
+              </li>
+              <li className="nav-link">
                 <Link to="/logout">Logout</Link>
-              </a>
+              </li>
             </div>
           </div>
         </div>
@@ -46,6 +48,8 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/registration" element={<Registration />}></Route>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/appointment" element={<Appointment />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </>
   );
