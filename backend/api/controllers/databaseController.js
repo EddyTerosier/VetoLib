@@ -1,6 +1,7 @@
 const animalModel = require("../models/animalModel");
 const userModel = require("../models/userModel");
 const cabinetModel = require("../models/cabinetModel");
+const appointmentModel = require("../models/appointmentModel");
 
 const sequelize = require("../../database/database");
 const readline = require("readline").createInterface({
