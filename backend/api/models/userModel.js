@@ -40,7 +40,7 @@ const User = sequelize.define(
     freezeTableName: true,
     instanceMethods: {
         generateHash(password) {
-            return bcrypt.hash(password, bcrypt.genSaltSync(8));// 8 ou 10 ?
+            return bcrypt.hash(password, bcrypt.genSaltSync(8));
         },
         validPassword(password) {
             return bcrypt.compare(password, this.password);
