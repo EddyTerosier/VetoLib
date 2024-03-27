@@ -28,7 +28,7 @@ exports.getAnimal = async(req,res) => {
 exports.postAnimal = async(req, res) => {
     let animal = req.body;
     if (!animal.userId) {
-        return res.status(400).json({ message: "Le champ userId est requis pour créer un animal." });
+        return res.status(400).json({ message: "Erreur lors de la récupération de l'ID utilisateur" });
     }
     try {
         const newAnimal = await Animal.create(animal);
