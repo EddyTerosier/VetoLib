@@ -5,7 +5,7 @@ const cabinetController = require('../controllers/cabinetControllers')
 
 route.get('/getAllCabinet', cabinetController.getAllCabinet)
 route.get('/getCabinet/:id', cabinetController.getCabinet)
-route.post('/createCabinet', carController.createCabinet)
+route.post('/createCabinet', cabinetController.createCabinet)
 route.put('/updateCabinet/:id',  cabinetController.updateCabinet)
 route.delete('/deleteCabinet/:id',  cabinetController.deleteCabinet)
 

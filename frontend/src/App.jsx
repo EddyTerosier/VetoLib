@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Link, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
+import Home from "./components/Home.jsx";
+import Registration from "./components/Registration.jsx";
+import Appointment from "./components/Appointment.jsx";
+import Profile from "./components/Profile.jsx";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid bg-dark my-0">
+          <Link to="/">Accueil</Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <li className="nav-link">
+                <Link to="/appointment">Prendre un RDV</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/profile">Mon profil</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/login">Login</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/registration">Registration</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/logout">Logout</Link>
+              </li>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <Routes>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/registration" element={<Registration />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/appointment" element={<Appointment />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
