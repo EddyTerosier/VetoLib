@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 export default function Login() {
   const [loginData, setLoginData] = useState({
     email: "",
@@ -27,7 +27,6 @@ export default function Login() {
         if (data.token) {
           // Stockage du token dans les cookies
           document.cookie = "jwt=" + data.token + ";path=/;max-age=86400"; // Expiration après 1 jour
-          alert("Connexion réussie!");
           window.location.href = "/";
           // window.history.back();
         } else {
@@ -41,49 +40,67 @@ export default function Login() {
   };
 
   return (
-    <div className="content">
-      <div className="bg_color_2">
-        <div className="container margin_60_35">
-          <div id="login">
-            <h1>Se connecter à VétoLib !</h1>
-            <div className="box_form">
-              <form id="loginForm" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={loginData.email}
-                    onChange={handleChange}
-                    placeholder="Adresse e-mail"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={loginData.password}
-                    onChange={handleChange}
-                    placeholder="Mot de passe"
-                  />
-                </div>
-                <div className="form-group text-center add_top_20">
-                  <button className="btn btn-primary" type="submit">
-                    Se connecter
-                  </button>
-                </div>
-              </form>
-            </div>
-            <p className="text-center link_bright">
-              Vous n'avez pas de compte{" "}
-              <Link to="/registration">
-                <strong>S'inscrire maintenant!</strong>
-              </Link>
-            </p>
-          </div>
-        </div>
+    <div className="registration-page min-vh-100 container">
+      <div className="info-section text-center my-5">
+        <h2 className="section-title text-white">Connectez-vous !</h2>
+        <p className="text-white-50">
+          Et naviguez sur notre site dès maintenant.
+        </p>
       </div>
+      <div className="form-container my-5">
+        <h1 className="text-center mb-4">Formulaire de connexion</h1>
+        <form
+          id="loginForm"
+          onSubmit={handleSubmit}
+          className="row justify-content-center"
+        >
+          <div className="col-md-8">
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={loginData.email}
+                  onChange={handleChange}
+                  placeholder="Adresse e-mail"
+                />
+              </div>
+            </div>
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Mot de passe</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  value={loginData.password}
+                  onChange={handleChange}
+                  placeholder="Mot de passe"
+                />
+              </div>
+            </div>
+            <div className="text-center add_top_20">
+              <button
+                type="submit"
+                value="submit"
+                className="mt-4 btn bg-orange appointmentBtn"
+              >
+                S'inscrire
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <p className="text-center link_bright">
+        Vous n'avez pas de compte{" "}
+        <Link to="/registration">
+          <strong>S'inscrire maintenant!</strong>
+        </Link>
+      </p>
     </div>
   );
 }

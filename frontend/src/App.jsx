@@ -17,7 +17,7 @@ function App() {
         <Route path="/registration" element={<Registration />}></Route>
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route path="/appointment" element={<Appointment />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/profile/:id" element={<Profile />}></Route>
       </Routes>
     </>
   );
