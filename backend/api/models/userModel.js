@@ -26,6 +26,18 @@ const User = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    phone: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 10,
+        max: 10,
+      },
+    },
+    address: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
     password: {
       type: DataTypes.STRING(255),
       allowNull: false,
@@ -39,14 +51,15 @@ const User = sequelize.define(
   {
     freezeTableName: true,
     instanceMethods: {
-        generateHash(password) {
-            return bcrypt.hash(password, bcrypt.genSaltSync(8));
-        },
-        validPassword(password) {
-            return bcrypt.compare(password, this.password);
-        }
-    }
-});
+      generateHash(password) {
+        return bcrypt.hash(password, bcrypt.genSaltSync(8));
+      },
+      validPassword(password) {
+        return bcrypt.compare(password, this.password);
+      },
+    },
+  },
+);
 
 User.hasMany(Animal);
 Animal.belongsTo(User);
