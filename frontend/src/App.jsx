@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route path="/appointment" element={<Appointment />}></Route>
         <Route path="/add-animal" element={<AddAnimal />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/profile/:id" element={<Profile />}></Route>
       </Routes>
     </>
   );
