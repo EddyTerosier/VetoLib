@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 export default function Login() {
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -27,8 +28,8 @@ export default function Login() {
         if (data.token) {
           // Stockage du token dans les cookies
           document.cookie = "jwt=" + data.token + ";path=/;max-age=86400"; // Expiration après 1 jour
-          window.location.href = "/";
-          // window.history.back();
+          navigate("/");
+          window.location.reload();
         } else {
           alert("Erreur de connexion: " + JSON.stringify(data));
         }
@@ -89,7 +90,7 @@ export default function Login() {
                 value="submit"
                 className="mt-4 btn bg-orange appointmentBtn"
               >
-                S'inscrire
+                Se connecter
               </button>
             </div>
           </div>
