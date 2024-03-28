@@ -135,7 +135,7 @@ const UserController = {
 
   // Déconnexion d'un utilisateur
    async logout  (req, res)  {
-    res.cookie('token', '', { expires: new Date(0), httpOnly: true, secure: true, sameSite: 'strict' });
+    res.cookie('token', '', { expires: new Date(0), httpOnly: true });
     res.status(200).json({ message: "Déconnexion réussie" });
   },
   
