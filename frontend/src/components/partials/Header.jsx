@@ -39,7 +39,7 @@ export default function Header() {
               <Link to="/registration">Registration</Link>
             </li>
             <li className="nav-link">
-            <a href="#" onClick={handleLogout}>Logout</a>
+            <Link onClick={handleLogout}>Logout</Link>
             </li>
           </div>
         </div>
