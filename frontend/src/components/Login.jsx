@@ -90,7 +90,7 @@ export default function Login() {
                 value="submit"
                 className="mt-4 btn bg-orange appointmentBtn"
               >
-                S'inscrire
+                Se connecter
               </button>
             </div>
           </div>
