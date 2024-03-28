@@ -9,6 +9,7 @@ const appointmentRoute = require('../api/routes/appointmentRoute')
 
 const app = express();
 
+
 app.use(express.json());
 app.use(cors());
 

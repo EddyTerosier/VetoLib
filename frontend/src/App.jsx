@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
+import Logout from "./components/Logout.jsx";
 import Home from "./components/Home.jsx";
 import Registration from "./components/Registration.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
@@ -17,6 +18,10 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/registration" element={<Registration />}></Route>
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
+        <Route 
+          path="/logout" 
+          element={<ProtectedRoute element={<Logout />} />}
+        ></Route>
         <Route
           path="/appointment"
           element={<ProtectedRoute element={<Appointment />} />}
