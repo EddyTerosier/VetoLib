@@ -19,3 +19,14 @@ exports.createAllTables = async (req, res) => {
       .json({ message: "An error occurred while creating the tables" });
   }
 };
+
+exports.dropAllTables = async (req, res) => {
+  try {
+    await sequelize.drop();
+    res.status(200).json({ message: "All tables were dropped successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "An error occurred while dropping the tables" });
+  }
+};

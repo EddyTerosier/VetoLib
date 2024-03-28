@@ -1,6 +1,14 @@
-const express = require("express");
-const route = express.Router();
-const animalController = require("../controllers/animalController");
+const express = require('express')
+const route = express.Router()
+const animalController = require('../controllers/animalController')
+const authenticate = require('../middlewares/authenticate');
+
+
+route.get('/getAllAnimal', animalController.getAllAnimal)
+route.get('/getAnimal/:id', animalController.getAnimal)
+route.post('/add-animal', authenticate, animalController.postAnimal)
+route.put('/updateAnimal/:id', animalController.updateAnimal)
+route.delete('/deleteAnimal/:id', animalController.deleteAnimal)
 
 route.get("/getAllAnimal", animalController.getAllAnimal);
 route.get("/getAnimal/:id", animalController.getAnimal);
