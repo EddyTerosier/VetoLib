@@ -32,8 +32,7 @@ export default function Registration() {
       .then((data) => {
         if (data.token) {
           document.cookie = "jwt=" + data.token + ";path=/;max-age=86400";
-          alert("Inscription réussie");
-          window.location.href = "/"; // Adaptez le chemin selon votre configuration
+          window.location.href = "/";
         } else {
           alert("Erreur lors de l'inscription: " + JSON.stringify(data));
         }
@@ -83,6 +82,32 @@ export default function Registration() {
                   value={registerData.lastname}
                   onChange={handleChange}
                   placeholder="Nom"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Numéro de téléphone</label>
+                <input
+                  type="phone"
+                  className="form-control"
+                  id="phone"
+                  name="phone"
+                  value={registerData.phone}
+                  onChange={handleChange}
+                  placeholder="Numéro de téléphone"
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Adresse</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="address"
+                  name="address"
+                  value={registerData.address}
+                  onChange={handleChange}
+                  placeholder="Adresse"
                 />
               </div>
             </div>
