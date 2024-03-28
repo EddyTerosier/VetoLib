@@ -39,6 +39,9 @@ export default function Header() {
             {token ? (
               <>
                 <li className="nav-link">
+                  <Link to="/update-profile">Modififer mon profil</Link>
+                </li>
+                <li className="nav-link">
                   <Link to="/profile">Mon profil</Link>
                 </li>
                 <li className="nav-link">

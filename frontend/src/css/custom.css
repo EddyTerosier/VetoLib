@@ -132,3 +132,68 @@
     background-color: #fff; /* Fond blanc pour le corps de l'accordéon */
 }
 
+/* Mon profil */
+
+/* Styles globaux pour la page */
+.appointment-page {
+    background-color: #f8f9fa; /* Couleur de fond légère */
+    padding-bottom: 40px; /* Espacement en bas */
+}
+
+.info-section {
+    margin-bottom: 40px; /* Espacement après la section d'information */
+}
+
+.section-title {
+    color: #323539; /* Couleur pour les titres des sections */
+}
+
+/* Styles pour les cartes */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    margin-bottom: 15px;
+    color: #323539;
+    font-weight: 500;
+}
+
+.card-text {
+    color: #646464;
+}
+
+
+.btn-modern {
+    background-color: #323539;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btn-modern:hover {
+    background-color: white;
+    color: #323539;
+    border: 1px solid #323539;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 15px;
+    }
+}
