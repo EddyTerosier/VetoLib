@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/custom.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function AddAnimalForm() {
+export default function AddAnimalForm() {
   const [formData, setFormData] = useState({
     name: "",
     race: "",
     age: "",
+    type: "",
   });
+  const [animalTypes, setAnimalTypes] = useState([]);
+  const [message, setMessage] = useState();
+  const notify = () => toast(message);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,11 +20,50 @@ function AddAnimalForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    fetch("http://localhost:8000/animal/add-animal", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error("Quelque chose s'est mal passé. Veuillez réessayer.");
+        }
+        return response.json();
+      })
+      .then((formData) => {
+        console.error("Succès:", formData);
+        setMessage("Animal ajouté avec succès!");
+        notify(message);
+      })
+      .catch((error) => {
+        setMessage("Erreur lors de l'ajout de l'animal.");
+        notify(message);
+      });
   };
+
+  useEffect(() => {
+    fetch("http://localhost:8000/animal/get-type-enum", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Quelque chose s'est mal passé");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAnimalTypes(data);
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+      });
+  }, []);
 
   return (
     <div className="container">
+      <ToastContainer />
       <div className="info-section text-center my-5">
         <h2 className="section-title text-white">Ajouter un Animal</h2>
         <p className="text-white-50">
@@ -43,6 +88,7 @@ function AddAnimalForm() {
                 className="form-control"
                 id="name"
                 name="name"
+                placeholder="Nom de l'animal"
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -56,6 +102,7 @@ function AddAnimalForm() {
                 className="form-control"
                 id="age"
                 name="age"
+                placeholder="Âge de l'animal"
                 value={formData.age}
                 onChange={handleChange}
               />
@@ -70,6 +117,7 @@ function AddAnimalForm() {
                 id="race"
                 name="race"
                 value={formData.race}
+                placeholder="Race de l'animal"
                 onChange={handleChange}
                 required
               />
@@ -86,13 +134,11 @@ function AddAnimalForm() {
                 onChange={handleChange}
                 required
               >
-                <option value="chien">Chien</option>
-                <option value="chat">Chat</option>
-                <option value="oiseau">Oiseau</option>
-                <option value="poisson">Poisson</option>
-                <option value="reptile">Reptile</option>
-                <option value="rongeur">Rongeur</option>
-                <option value="autre">Autre</option>
+                {animalTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="additional-info text-center my-5">
@@ -112,5 +158,3 @@ function AddAnimalForm() {
     </div>
   );
 }
-
-export default AddAnimalForm;

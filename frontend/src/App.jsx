@@ -4,10 +4,11 @@ import Home from "./components/Home.jsx";
 import Registration from "./components/Registration.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Appointment from "./components/Appointment.jsx";
-import Profile from "./components/Profile.jsx";
+import UpdateProfile from "./components/UpdateProfile.jsx";
 import AddAnimal from "./components/AddAnimal.jsx";
 import "./App.css";
 import Header from "./components/partials/Header.jsx";
+import Profile from "./components/Profile.jsx";
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         <Route path="/" element={<ProtectedRoute element={<Home />} />} />
         <Route path="/appointment" element={<Appointment />}></Route>
         <Route path="/add-animal" element={<AddAnimal />}></Route>
-        <Route path="/profile/:id" element={<Profile />}></Route>
+        <Route path="/update-profile/:id" element={<UpdateProfile />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </>
   );
