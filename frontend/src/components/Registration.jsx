@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Registration() {
   const [registerData, setRegisterData] = useState({
@@ -44,91 +45,104 @@ export default function Registration() {
   };
 
   return (
-    <main>
-      <div className="bg_color_2">
-        <div className="container margin_60_35">
-          <div id="register">
-            <h1>Please register to VetoLib!</h1>
-            <div className="row justify-content-center">
-              <div className="col-md-5">
-                <form id="registerForm" onSubmit={handleSubmit}>
-                  <div className="box_form">
-                    <div className="form-group">
-                      <label>Name</label>
-                      <input
-                        type="text"
-                        id="firstname"
-                        name="firstname"
-                        value={registerData.firstname}
-                        onChange={handleChange}
-                        placeholder="Prénom"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Last name</label>
-                      <input
-                        type="text"
-                        id="lastname"
-                        name="lastname"
-                        value={registerData.lastname}
-                        onChange={handleChange}
-                        placeholder="Nom"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Email</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={registerData.email}
-                        onChange={handleChange}
-                        placeholder="Adresse e-mail"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Role</label>
-                      <div>
-                        <input
-                          type="radio"
-                          id="user"
-                          name="role"
-                          value="user"
-                          onChange={handleChange}
-                        />
-                        <label htmlFor="user">User</label>
-                        <input
-                          type="radio"
-                          id="vet"
-                          name="role"
-                          value="vet"
-                          onChange={handleChange}
-                        />
-                        <label htmlFor="vet">Vétérinaire</label>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <label>Password</label>
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={registerData.password}
-                        onChange={handleChange}
-                        placeholder="Mot de passe"
-                      />
-                    </div>
-                    <div className="form-group text-center add_top_30">
-                      <input className="btn_1" type="submit" value="Submit" />
-                    </div>
-                  </div>
-                  {isAdmin && <div id="roleField">Role: Admin</div>}
-                </form>
+    <div className="registration-page min-vh-100 container">
+      <div className="info-section text-center my-5">
+        <h2 className="section-title text-white">Inscrivez-vous !</h2>
+        <p className="text-white-50">
+          Et naviguez sur notre site dès maintenant.
+        </p>
+      </div>
+      <div className="form-container mt-5 mb-4">
+        <h1 className="text-center mb-4">Formulaire d'inscription</h1>
+        <form
+          id="registerForm"
+          onSubmit={handleSubmit}
+          className="row justify-content-center"
+        >
+          <div className="col-md-8">
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Prénom</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="firstname"
+                  name="firstname"
+                  value={registerData.firstname}
+                  onChange={handleChange}
+                  placeholder="Prénom"
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Nom</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="lastname"
+                  name="lastname"
+                  value={registerData.lastname}
+                  onChange={handleChange}
+                  placeholder="Nom"
+                />
               </div>
             </div>
+            <div className="row">
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={registerData.email}
+                  onChange={handleChange}
+                  placeholder="Adresse e-mail"
+                />
+              </div>
+              <div className="col-md-6 mb-3">
+                <label className="form-label">Mot de passe</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  value={registerData.password}
+                  onChange={handleChange}
+                  placeholder="Mot de passe"
+                />
+              </div>
+            </div>
+            <label>Êtes-vous vétérinaire ?</label>
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input mt-2"
+                type="checkbox"
+                role="switch"
+                id="vet"
+                name="role"
+                value="vet"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="text-center add_top_20">
+              <button
+                type="submit"
+                value="submit"
+                className="mt-4 btn bg-orange appointmentBtn"
+              >
+                S'inscrire
+              </button>
+            </div>
           </div>
-        </div>
+          {isAdmin && <div id="roleField">Role: Admin</div>}
+        </form>
       </div>
-    </main>
+      <p className="text-center link_bright">
+        Vous avez déjà un compte{" "}
+        <Link to="/login">
+          <strong>Se connecter maintenant!</strong>
+        </Link>
+      </p>
+    </div>
   );
 }
