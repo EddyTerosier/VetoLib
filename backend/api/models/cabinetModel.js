@@ -15,13 +15,25 @@ const Cabinet = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+    street_number: {
+      type: DataTypes.INTEGER(),
+      allowNull: false,
+    },
     address: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    phone: {
-      type: DataTypes.STRING(20),
+    postal_code: {
+      type: DataTypes.INTEGER(),
       allowNull: false,
+    },
+    phone: {
+      type: DataTypes.INTEGER(),
+      allowNull: false,
+      validate: {
+        min: 10,
+        max: 10,
+      },
     },
     email: {
       type: DataTypes.STRING(100),

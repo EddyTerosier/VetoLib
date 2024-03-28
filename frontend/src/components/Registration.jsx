@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Registration() {
+  const navigate = useNavigate();
+
   const [registerData, setRegisterData] = useState({
     firstname: "",
     lastname: "",
@@ -32,7 +34,8 @@ export default function Registration() {
       .then((data) => {
         if (data.token) {
           document.cookie = "jwt=" + data.token + ";path=/;max-age=86400";
-          window.location.href = "/";
+          navigate("/");
+          window.location.reload();
         } else {
           alert("Erreur lors de l'inscription: " + JSON.stringify(data));
         }
