@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-
+import Cookie from "js-cookie";
 export default function Header() {
+  const token = Cookie.get("jwt");
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid bg-dark my-0">
@@ -16,23 +17,44 @@ export default function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
-            <li className="nav-link">
-              <Link to="/appointment">Prendre un RDV</Link>
-            </li>
-            <li className="nav-link">
-              <Link to="/profile">Mon profil</Link>
-            </li>
-            <li className="nav-link">
-              <Link to="/login">Login</Link>
-            </li>
-            <li className="nav-link">
-              <Link to="/registration">Registration</Link>
-            </li>
-            <li className="nav-link">
-              <Link to="/logout">Logout</Link>
-            </li>
+        <div
+          className="collapse navbar-collapse justify-content-between"
+          id="navbarNavAltMarkup"
+        >
+          <div className="navbar-nav justify-content-start">
+            {token ? (
+              <>
+                <li className="nav-link">
+                  <Link to="/appointment">Prendre un RDV</Link>
+                </li>
+                <li className="nav-link">
+                  <Link to="/add-animal">Ajouter un animal</Link>
+                </li>
+              </>
+            ) : (
+              <div></div>
+            )}
+          </div>
+          <div className="navbar-nav justify-content-end">
+            {token ? (
+              <>
+                <li className="nav-link">
+                  <Link to="/profile">Mon profil</Link>
+                </li>
+                <li className="nav-link">
+                  <Link to="/logout">Logout</Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-link">
+                  <Link to="/login">Login</Link>
+                </li>
+                <li className="nav-link">
+                  <Link to="/registration">Registration</Link>
+                </li>
+              </>
+            )}
           </div>
         </div>
       </div>
