@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start serve": "npx nodemon server.js"
+    "ndn": "npx nodemon server.js"
   },
   "author": "",
   "license": "ISC",
