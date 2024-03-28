@@ -81,7 +81,7 @@ const UserController = {
         lastname,
         email,
         password: hashedPassword,
-        role: "user",
+        role: role || "user",
       });
       const token = jwt.sign(
         { id: newUser.id, email: newUser.email, role: newUser.role },

@@ -1,14 +1,6 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    document.cookie = "jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    alert("Déconnexion réussie!");
-    navigate('/login'); 
-  };
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid bg-dark my-0">
@@ -39,7 +31,7 @@ export default function Header() {
               <Link to="/registration">Registration</Link>
             </li>
             <li className="nav-link">
-            <Link onClick={handleLogout}>Logout</Link>
+            <Link to="/logout">Se déconnecter</Link>
             </li>
           </div>
         </div>
