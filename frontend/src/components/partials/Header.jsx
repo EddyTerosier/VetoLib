@@ -25,6 +25,9 @@ export default function Header() {
             {token ? (
               <>
                 <li className="nav-link">
+                  <Link to="/cabinets">Tous les cabinets</Link>
+                </li>
+                <li className="nav-link">
                   <Link to="/appointment">Prendre un RDV</Link>
                 </li>
                 <li className="nav-link">
