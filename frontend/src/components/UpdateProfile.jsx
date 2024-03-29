@@ -6,18 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
 
 export default function UpdateProfile({ userData }) {
-  const [userDetails, setUserDetails] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    address: "",
-    password: "",
-    newPassword: "",
-    confirmPassword: "",
-    role: "",
-  });
-  const [message, setMessage] = useState("");
+  const [userDetails, setUserDetails] = useState({});
+  const [message, setMessage] = useState();
 
   const userId = useParams()["id"];
 
@@ -72,10 +62,12 @@ export default function UpdateProfile({ userData }) {
       .then((data) => {
         if (data && data.id) {
           setMessage("Profil modifié avec succès!");
+          toast(message);
         } else {
           setMessage(
             "Erreur lors de la mise à jour du profil: " + JSON.stringify(data),
           );
+          toast(message);
         }
       })
       .catch((error) => {
@@ -88,13 +80,10 @@ export default function UpdateProfile({ userData }) {
     <div className="registration-page min-vh-100 container">
       <ToastContainer />
       <div className="info-section text-center my-5">
-        <h2 className="section-title text-white">
-          Bienvenue sur votre profil !
-        </h2>
+        <h2 className="section-title text-white">Modifier le profil</h2>
         <p className="text-white-50">Ici vous pouvez modifier votre profil.</p>
       </div>
       <div className="form-container mt-5 mb-4">
-        <h1 className="text-center mb-4">Profil de {userDetails.firstname} </h1>
         <form onSubmit={handleSubmit} className="row justify-content-center">
           <div className="col-md-8">
             <div className="row">
@@ -209,18 +198,4 @@ UpdateProfile.propTypes = {
     confirmPassword: PropTypes.string,
     role: PropTypes.string,
   }),
-};
-
-UpdateProfile.defaultProps = {
-  userData: {
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    address: "",
-    password: "",
-    newPassword: "",
-    confirmPassword: "",
-    role: "",
-  },
 };
