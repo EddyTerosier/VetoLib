@@ -31,8 +31,14 @@ const Cabinet = sequelize.define(
       type: DataTypes.INTEGER(),
       allowNull: false,
       validate: {
-        min: 10,
-        max: 10,
+        isNumeric: {
+          args: true,
+          msg: "Le numéro de téléphone doit être un nombre",
+        },
+        len: {
+          args: [10, 10],
+          msg: "Le numéro de téléphone doit contenir 10 chiffres",
+        },
       },
     },
     email: {
