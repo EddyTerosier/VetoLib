@@ -25,20 +25,23 @@ exports.getAnimal = async (req, res) => {
   });
 };
 
-
-exports.postAnimal = async(req, res) => {
-    let animalData = req.body;
-    try {
-        const newAnimal = await Animal.create({
-            ...animalData,
-            userId: req.user.id 
-        });
-        res.status(201).json({ message: "Animal ajouté avec succès", animal: newAnimal });
-    } catch (error) {
-        res.status(500).json({ message: "Erreur lors de l'ajout de l'animal", error: error.message });
-    }
+exports.postAnimal = async (req, res) => {
+  let animalData = req.body;
+  try {
+    const newAnimal = await Animal.create({
+      ...animalData,
+      userId: req.user.id,
+    });
+    res
+      .status(201)
+      .json({ message: "Animal ajouté avec succès", animal: newAnimal });
+  } catch (error) {
+    res.status(500).json({
+      message: "Erreur lors de l'ajout de l'animal",
+      error: error.message,
+    });
+  }
 };
-
 
 //pour modifier un animal
 exports.updateAnimal = async (req, res) => {

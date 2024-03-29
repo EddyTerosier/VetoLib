@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/custom.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookie from "js-cookie";
 
 export default function AddAnimalForm() {
   const [formData, setFormData] = useState({
@@ -12,34 +13,43 @@ export default function AddAnimalForm() {
   });
   const [animalTypes, setAnimalTypes] = useState([]);
   const [message, setMessage] = useState();
-  const notify = () => toast(message);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const token = Cookie.get("jwt");
+  useEffect(() => {
+    if (message) {
+      toast(message);
+    }
+  }, [message]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:8000/animal/add-animal", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(formData),
-      headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
-        console.log(response);
         if (!response.ok) {
           throw new Error("Quelque chose s'est mal passé. Veuillez réessayer.");
         }
         return response.json();
       })
       .then((formData) => {
-        console.error("Succès:", formData);
         setMessage("Animal ajouté avec succès!");
-        notify(message);
+        toast(message);
+        return formData;
       })
       .catch((error) => {
+        console.log(error);
         setMessage("Erreur lors de l'ajout de l'animal.");
-        notify(message);
+        toast(message);
       });
   };
 
@@ -55,6 +65,7 @@ export default function AddAnimalForm() {
       })
       .then((data) => {
         setAnimalTypes(data);
+        setFormData((prevState) => ({ ...prevState, type: data[0] }));
       })
       .catch((error) => {
         console.error("Erreur:", error);
