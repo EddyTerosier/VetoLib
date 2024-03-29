@@ -88,12 +88,10 @@ const UserController = {
         process.env.SECRET_KEY,
         { expiresIn: "1h" },
       );
-      res
-        .status(201)
-        .json({
-          user: { id: newUser.id, firstname, lastname, email, role },
-          token,
-        });
+      res.status(201).json({
+        user: { id: newUser.id, firstname, lastname, email, role },
+        token,
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -118,27 +116,25 @@ const UserController = {
       const token = jwt.sign(
         { id: user.id, email: user.email, role: user.role },
         process.env.SECRET_KEY,
-        { expiresIn: "1h" },
+        { expiresIn: "1 day" },
       );
-      res
-        .status(200)
-        .json({
-          message: "Connexion réussie",
-          token,
-          role: user.role,
-          id: user.id,
-        });
+      res.status(200).json({
+        message: "Connexion réussie",
+        token,
+        role: user.role,
+        id: user.id,
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   },
 
   // Déconnexion d'un utilisateur
-   async logout  (req, res)  {
-    res.cookie('token', '', { expires: new Date(0), httpOnly: true });
+  async logout(req, res) {
+    res.cookie("token", "", { expires: new Date(0), httpOnly: true });
     res.status(200).json({ message: "Déconnexion réussie" });
   },
-  
+
   // Récupérer l'utilisateur par son token
   async getUserByToken(req, res) {
     try {
