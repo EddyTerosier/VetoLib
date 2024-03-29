@@ -30,6 +30,9 @@ export default function Header() {
                 <li className="nav-link">
                   <Link to="/add-animal">Ajouter un animal</Link>
                 </li>
+                <li className="nav-link">
+                  <Link to="/admin">Administration</Link>
+                </li>
               </>
             ) : (
               <div></div>
