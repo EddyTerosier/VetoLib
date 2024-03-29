@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 export default function Header() {
   const navigate = useNavigate();
   const token = Cookie.get("jwt");
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState({});
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
     fetch("http://127.0.0.1:8000/user/getIdUser", {
       method: "GET",
       headers: {
@@ -18,12 +21,9 @@ export default function Header() {
         setUserId(data);
       })
       .catch((error) => {
-        console.error(
-          "Erreur lors de la récupération des données utilisateur:",
-          error,
-        );
+        console.error("Erreur lors de la récuperation de l'utilisateur", error);
       });
-  }, []);
+  }, [token]);
 
   // Fonction pour gérer le clic sur "Mon profil"
   const handleProfileClick = () => {
