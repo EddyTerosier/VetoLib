@@ -30,8 +30,14 @@ const User = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: true,
       validate: {
-        min: 10,
-        max: 10,
+        isNumeric: {
+          args: true,
+          msg: "Le numéro de téléphone doit être un nombre",
+        },
+        len: {
+          args: [10, 10],
+          msg: "Le numéro de téléphone doit contenir 10 chiffres",
+        },
       },
     },
     address: {
