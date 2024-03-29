@@ -17,6 +17,16 @@ const UserController = {
     }
   },
 
+  // Avoir l'id d'un utilisateur
+  async getIdUser(req, res) {
+    try {
+      const user = await User.findOne({ where: { id: req.user.id } });
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
   // Lire les informations de tous les utilisateurs
   async getAllUsers(req, res) {
     try {
@@ -119,7 +129,7 @@ const UserController = {
       const token = jwt.sign(
         { id: user.id, email: user.email, role: user.role },
         process.env.SECRET_KEY,
-        { expiresIn: "1 day" },
+        { expiresIn: "1h" },
       );
       res.status(200).json({
         message: "Connexion réussie",
