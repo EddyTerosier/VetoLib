@@ -17,6 +17,16 @@ const UserController = {
     }
   },
 
+  // Avoir l'id d'un utilisateur
+  async getIdUser(req, res) {
+    try {
+      const user = await User.findOne({ where: { id: req.user.id } });
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
   // Lire les informations de tous les utilisateurs
   async getAllUsers(req, res) {
     try {
@@ -30,17 +40,20 @@ const UserController = {
   // Mettre à jour un utilisateur
   async updateUser(req, res) {
     try {
-      const { firstName, lastName, email, password, role } = req.body;
       const user = await User.findByPk(req.params.id);
+      const { firstname, lastname, email, password, role, address, phone } =
+        req.body;
 
       if (!user) {
         return res.status(404).json({ message: "Utilisateur non trouvé" });
       }
 
-      user.firstName = firstName;
-      user.lastName = lastName;
+      user.firstname = firstname;
+      user.lastname = lastname;
       user.email = email;
       user.role = role;
+      user.address = address;
+      user.phone = phone;
       if (password) {
         user.password = await bcrypt.hash(password, 10);
       }
@@ -88,12 +101,10 @@ const UserController = {
         process.env.SECRET_KEY,
         { expiresIn: "1h" },
       );
-      res
-        .status(201)
-        .json({
-          user: { id: newUser.id, firstname, lastname, email, role },
-          token,
-        });
+      res.status(201).json({
+        user: { id: newUser.id, firstname, lastname, email, role },
+        token,
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -120,25 +131,23 @@ const UserController = {
         process.env.SECRET_KEY,
         { expiresIn: "1h" },
       );
-      res
-        .status(200)
-        .json({
-          message: "Connexion réussie",
-          token,
-          role: user.role,
-          id: user.id,
-        });
+      res.status(200).json({
+        message: "Connexion réussie",
+        token,
+        role: user.role,
+        id: user.id,
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   },
 
   // Déconnexion d'un utilisateur
-   async logout  (req, res)  {
-    res.cookie('token', '', { expires: new Date(0), httpOnly: true });
+  async logout(req, res) {
+    res.cookie("token", "", { expires: new Date(0), httpOnly: true });
     res.status(200).json({ message: "Déconnexion réussie" });
   },
-  
+
   // Récupérer l'utilisateur par son token
   async getUserByToken(req, res) {
     try {

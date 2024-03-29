@@ -1,64 +1,94 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PropTypes from "prop-types";
 
-export default function UpdateProfile() {
-  const [userData, setUserData] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    address: "",
-    password: "",
-    newPassword: "",
-    confirmPassword: "",
-  });
+export default function UpdateProfile({ userData }) {
+  const [userDetails, setUserDetails] = useState({});
+  const [message, setMessage] = useState();
 
   const userId = useParams()["id"];
 
   useEffect(() => {
-    const cookie = Cookies.get("jwt");
-    fetch(`http://127.0.0.1:8000/user/getUser/${userId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${cookie}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUserData(data);
-      })
-      .catch((error) => {
-        console.error(
-          "Erreur lors de la récupération des données utilisateur:",
-          error,
-        );
+    if (userData) {
+      setUserDetails({
+        ...userDetails,
+        firstname: userData.firstname || "",
+        lastname: userData.lastname || "",
+        email: userData.email || "",
+        phone: userData.phone || "",
+        address: userData.address || "",
+        role: userData.role || "",
       });
-  }, [userId]);
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    if (message) {
+      toast(message);
+    }
+  }, [message]);
+
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (userDetails.newPassword !== userDetails.confirmPassword) {
+      alert("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    const dataToSend = {
+      ...userDetails,
+      password: userDetails.newPassword
+        ? userDetails.newPassword
+        : userDetails.password,
+    };
+
+    fetch(`http://127.0.0.1:8000/user/updateUser/${userId}`, {
+      method: "PUT",
+      body: JSON.stringify(dataToSend),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("jwt")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data && data.id) {
+          setMessage("Profil modifié avec succès!");
+          toast(message);
+        } else {
+          setMessage(
+            "Erreur lors de la mise à jour du profil: " + JSON.stringify(data),
+          );
+          toast(message);
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+        alert("Erreur lors de la mise à jour du profil: " + error.message);
+      });
   };
 
   return (
     <div className="registration-page min-vh-100 container">
+      <ToastContainer />
       <div className="info-section text-center my-5">
-        <h2 className="section-title text-white">
-          Bienvenue sur votre profil !
-        </h2>
+        <h2 className="section-title text-white">Modifier le profil</h2>
         <p className="text-white-50">Ici vous pouvez modifier votre profil.</p>
       </div>
       <div className="form-container mt-5 mb-4">
-        <h1 className="text-center mb-4">Profil de {userData.firstname} </h1>
         <form onSubmit={handleSubmit} className="row justify-content-center">
           <div className="col-md-8">
             <div className="row">
               <div className="col-md-6 mb-3">
-                <label htmlFor="name" className="form-label">
+                <label htmlFor="firstname" className="form-label">
                   Prénom
                 </label>
                 <input
@@ -66,12 +96,12 @@ export default function UpdateProfile() {
                   className="form-control"
                   id="firstname"
                   name="firstname"
-                  value={userData.firstname}
+                  value={userDetails.firstname}
                   onChange={handleChange}
                 />
               </div>
               <div className="col-md-6 mb-3">
-                <label htmlFor="email" className="form-label">
+                <label htmlFor="lastname" className="form-label">
                   Nom
                 </label>
                 <input
@@ -79,14 +109,14 @@ export default function UpdateProfile() {
                   className="form-control"
                   id="lastname"
                   name="lastname"
-                  value={userData.lastname}
+                  value={userDetails.lastname}
                   onChange={handleChange}
                 />
               </div>
             </div>
             <div className="row">
               <div className="col-md-6 mb-3">
-                <label htmlFor="name" className="form-label">
+                <label htmlFor="phone" className="form-label">
                   Téléphone
                 </label>
                 <input
@@ -94,10 +124,12 @@ export default function UpdateProfile() {
                   className="form-control"
                   id="phone"
                   name="phone"
+                  value={userDetails.phone}
+                  onChange={handleChange}
                 />
               </div>
               <div className="col-md-6 mb-3">
-                <label htmlFor="email" className="form-label">
+                <label htmlFor="address" className="form-label">
                   Adresse
                 </label>
                 <input
@@ -105,12 +137,14 @@ export default function UpdateProfile() {
                   className="form-control"
                   id="address"
                   name="address"
+                  value={userDetails.address}
+                  onChange={handleChange}
                 />
               </div>
             </div>
             <div className="row">
               <div className="col-md-6 mb-3">
-                <label htmlFor="name" className="form-label">
+                <label htmlFor="newPassword" className="form-label">
                   Nouveau mot de passe
                 </label>
                 <input
@@ -118,10 +152,12 @@ export default function UpdateProfile() {
                   className="form-control"
                   id="newPassword"
                   name="newPassword"
+                  value={userDetails.newPassword}
+                  onChange={handleChange}
                 />
               </div>
               <div className="col-md-6 mb-3">
-                <label htmlFor="email" className="form-label">
+                <label htmlFor="confirmPassword" className="form-label">
                   Confirmer le mot de passe
                 </label>
                 <input
@@ -129,6 +165,8 @@ export default function UpdateProfile() {
                   className="form-control"
                   id="confirmPassword"
                   name="confirmPassword"
+                  value={userDetails.confirmPassword}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -147,3 +185,17 @@ export default function UpdateProfile() {
     </div>
   );
 }
+
+UpdateProfile.propTypes = {
+  userData: PropTypes.shape({
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    address: PropTypes.string,
+    password: PropTypes.string,
+    newPassword: PropTypes.string,
+    confirmPassword: PropTypes.string,
+    role: PropTypes.string,
+  }),
+};
