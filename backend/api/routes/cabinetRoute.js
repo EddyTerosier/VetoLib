@@ -1,19 +1,17 @@
-const express = require("express");
-const route = express.Router();
-const cabinetController = require("../controllers/cabinetControllers");
+const express = require('express')
+const route = express.Router()
+const cabinetController = require('../controllers/cabinetControllers')
 // const { isAuthenticated, hasRole } = require('../middleware/middleware');
 
-route.get("/get-all-cabinets", cabinetController.getAllCabinet);
-route.get("/get-cabinet/:id", cabinetController.getCabinet);
-route.post("/add-cabinet", cabinetController.createCabinet);
-route.put("/update-cabinet/:id", cabinetController.updateCabinet);
-route.delete("/delete-cabinet/:id", cabinetController.deleteCabinet);
+route.get('/getAllCabinet', cabinetController.getAllCabinet)
+route.get('/getCabinet/:id', cabinetController.getCabinet)
+route.post('/createCabinet', cabinetController.createCabinet)
+route.put('/updateCabinet/:id',  cabinetController.updateCabinet)
+route.delete('/deleteCabinet/:id',  cabinetController.deleteCabinet)
 
 //routes filtrées
-route.get("/get-cabinet-by-name/:name", cabinetController.getCabinetByName);
-route.get(
-  "/get-cabinet-by-address/:address",
-  cabinetController.getCabinetByAddress,
-);
+route.get('/getCabinetByName/:name', cabinetController.getCabinetByName)
+route.get('/getCabinetByAddress/:address', cabinetController.getCabinetByAddress)
+
 
 module.exports = route;
