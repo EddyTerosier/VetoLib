@@ -6,7 +6,7 @@ function AdminCabinet() {
 
     useEffect(() => {
         const token = Cookies.get("jwt");
-        fetch("http://127.0.0.1:8000/cabinet/getAllCabinet", {
+        fetch("http://127.0.0.1:8000/cabinet/get-all-cabinets", {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -33,8 +33,10 @@ function AdminCabinet() {
         })
         .then(response => {
             if (response.ok) {
+                // Supprime le cabinet de l'état `cabinets` après la suppression réussie
                 setCabinets(cabinets.filter(cabinet => cabinet.id !== cabinetId));
             } else {
+                // Gérer l'échec de la suppression
                 console.error("Échec de la suppression du cabinet");
             }
         })
