@@ -29,6 +29,8 @@ export default function Header() {
                 </li>
                 <li className="nav-link">
                   <Link to="/add-animal">Ajouter un animal</Link>
+                </li><li className="nav-link">
+                  <Link to="/generate-bdd">Générer base de données</Link>
                 </li>
               </>
             ) : (

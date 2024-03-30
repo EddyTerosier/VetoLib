@@ -10,6 +10,7 @@ import AddAnimal from "./components/AddAnimal.jsx";
 import "./App.css";
 import Header from "./components/partials/Header.jsx";
 import Profile from "./components/Profile.jsx";
+import GenerateBdd from "./components/GenerateBdd.jsx";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
          <Route
           path="/profile/:id"
           element={<ProtectedRoute element={<Profile />} />}
+        ></Route>
+        <Route
+          path="/generate-bdd"
+          element={<ProtectedRoute element={<GenerateBdd />} />}
         ></Route>
       </Routes>
     </>

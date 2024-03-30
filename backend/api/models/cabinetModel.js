@@ -30,10 +30,6 @@ const Cabinet = sequelize.define(
     phone: {
       type: DataTypes.INTEGER(),
       allowNull: false,
-      validate: {
-        min: 10,
-        max: 10,
-      },
     },
     email: {
       type: DataTypes.STRING(100),
