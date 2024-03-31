@@ -9,8 +9,10 @@ import AddAnimal from "./components/AddAnimal.jsx";
 import "./App.css";
 import Header from "./components/partials/Header.jsx";
 import Profile from "./components/Profile.jsx";
+import GenerateBdd from "./components/GenerateBdd.jsx";
 import Cabinet from "./components/Cabinet.jsx";
 import AdminPanel from "./components/Admin/Admin.jsx";
+
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
           element={<ProtectedRoute element={<Profile />} />}
         ></Route>
         <Route
+          path="/generate-bdd"
+          element={<ProtectedRoute element={<GenerateBdd />} />}
           path="/admin"
           element={<ProtectedRoute element={<AdminPanel />} />}
         ></Route>
