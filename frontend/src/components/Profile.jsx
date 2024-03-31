@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/custom.css";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import UpdateProfile from "./UpdateProfile.jsx";
 
 export default function Profile() {
   const userId = useParams()["id"];
+  const [userData, setUserData] = useState(null);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   useEffect(() => {
     fetch(`http://127.0.0.1:8000/user/getUser/${userId}`, {
@@ -12,7 +15,7 @@ export default function Profile() {
     })
       .then((response) => response.json())
       .then((data) => {
-        return data;
+        setUserData(data);
       })
       .catch((error) => {
         console.error(
@@ -21,9 +24,12 @@ export default function Profile() {
         );
       });
   }, [userId]);
+  const handleEditClick = () => {
+    setShowUpdateForm(!showUpdateForm);
+  };
 
   return (
-    <div className="container">
+    <div className="container min-vh-100">
       <div className="info-section text-center my-5">
         <h2 className="section-title text-white">Mon Profil</h2>
         <p className="text-white-50">Les détails de mon profil.</p>
@@ -33,7 +39,9 @@ export default function Profile() {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Prénom</h5>
-              <p className="card-text">Jean</p>
+              <p className="card-text">
+                {userData ? userData.firstname : "Chargement..."}
+              </p>
             </div>
           </div>
         </div>
@@ -41,7 +49,9 @@ export default function Profile() {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Nom</h5>
-              <p className="card-text">Dupont</p>
+              <p className="card-text">
+                {userData ? userData.lastname : "Chargement..."}
+              </p>
             </div>
           </div>
         </div>
@@ -49,7 +59,9 @@ export default function Profile() {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Email</h5>
-              <p className="card-text">jean.dupont@example.com</p>
+              <p className="card-text">
+                {userData ? userData.email : "Chargement..."}
+              </p>
             </div>
           </div>
         </div>
@@ -57,7 +69,9 @@ export default function Profile() {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Téléphone</h5>
-              <p className="card-text">0123456789</p>
+              <p className="card-text">
+                0{userData ? userData.phone : "Chargement..."}
+              </p>
             </div>
           </div>
         </div>
@@ -65,7 +79,9 @@ export default function Profile() {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Adresse</h5>
-              <p className="card-text">123 Rue de la République, 75001 Paris</p>
+              <p className="card-text">
+                {userData ? userData.address : "Chargement..."}
+              </p>
             </div>
           </div>
         </div>
@@ -73,15 +89,23 @@ export default function Profile() {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Rôle</h5>
-              <p className="card-text">Utilisateur</p>
+              <p className="card-text">
+                {userData ? userData.role : "Chargement..."}
+              </p>
             </div>
           </div>
         </div>
       </div>
+      <div className="text-center my-4">
+        <button
+          onClick={handleEditClick}
+          className="btn bg-orange appointmentBtn"
+        >
+          Modifier le profil
+        </button>
+      </div>
       <div className="text-center mt-4">
-        <Link to="/update-profile/1" className="btn btn-modern">
-          Modifier le Profil
-        </Link>
+        {showUpdateForm && userData && <UpdateProfile userData={userData} />}
       </div>
     </div>
   );
