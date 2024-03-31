@@ -45,6 +45,8 @@ function App() {
         <Route
           path="/generate-bdd"
           element={<ProtectedRoute element={<GenerateBdd />} />}
+        ></Route>
+        <Route
           path="/admin"
           element={<ProtectedRoute element={<AdminPanel />} />}
         ></Route>
