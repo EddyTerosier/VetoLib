@@ -11,7 +11,6 @@ Mise en Place du Back-End
 
     bash
 cd backend
-cd api
 npm install
 # ou
 yarn install
@@ -19,7 +18,7 @@ yarn install
 Configuration du fichier .env dans le fichier /api :  remplissez les valeurs nécessaires, notamment les détails de connexion à votre base de données MySQL.
 
 DATABASE_NAME="vetolib"
-DATABASE_HOST=""
+DATABASE_HOST="localhost"
 DATABASE_USER=""
 DATABASE_PASSWORD=""
 DATABASE_DIALECT="mysql"
@@ -29,7 +28,7 @@ Démarrage du Serveur : Lancez le serveur back-end avec la commande suivante :
 
 bash
 
-    npm ndm
+    npm run ndm
     # ou
     yarn ndm
 
@@ -61,4 +60,4 @@ Initialisation de la Base de Données avec l'API
 Après avoir configuré et démarré votre serveur back-end, vous pouvez initialiser votre base de données avec le bouton disponible sur la navbar de l'acceuil "Générer la base de données".
 
 
-Le bouton create-all-table est conçu pour être utilisé une seule fois lors de l'initialisation initiale de votre base de données. Il crée les structures de tables nécessaires pour que l'application fonctionne correctement. Si vous exécutez cet endpoint sur une base de données déjà initialisée, cela pourrait entraîner la perte de données existantes si les tables sont recréées. 
+Le bouton "Générer base de données" est conçu pour être utilisé une seule fois lors de l'initialisation initiale de votre base de données. Il crée les structures de tables nécessaires pour que l'application fonctionne correctement. Si vous exécutez cet endpoint sur une base de données déjà initialisée, cela pourrait entraîner la perte de données existantes si les tables sont recréées. 
